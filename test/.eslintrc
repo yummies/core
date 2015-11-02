@@ -3,3 +3,4 @@
     mocha: true
   rules:
     no-new: 1
+    no-magic-numbers: 0
