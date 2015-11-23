@@ -16,8 +16,7 @@
   ],
   "dependencies": {
     "react": "0.14.x",
-    "lodash.isplainobject": "3.2.x",
-    "babel-runtime": "5.8.x"
+    "lodash.isplainobject": "3.2.x"
   },
   "devDependencies": {
     "babel": "5.8.x",
