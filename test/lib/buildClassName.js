@@ -19,17 +19,6 @@ describe('buildClassName', () => {
         );
     });
 
-    it('no block', () => {
-        expect(buildClassName.bind(buildClassName, {
-            elem: 'elem',
-            mods: {
-                mod: 'val'
-            }
-        })).to.throw(
-            'you should specify block'
-        );
-    });
-
     it('invalid block', () => {
         expect(buildClassName.bind(buildClassName, {
             block: 123
@@ -109,12 +98,30 @@ describe('buildClassName', () => {
         );
     });
 
+    it('no block + elem', () => {
+        expect(buildClassName.bind(buildClassName, {
+            elem: 'elem'
+        })).to.throw(
+            'you should provide block along with elem'
+        );
+    });
+
     it('block + elem', () => {
         expect(buildClassName({
             block: 'block',
             elem: 'elem'
         })).to.equal(
             'block__elem'
+        );
+    });
+
+    it('no block + mods', () => {
+        expect(buildClassName.bind(buildClassName, {
+            mods: {
+                mod: 'val'
+            }
+        })).to.throw(
+            'you should provide block/elem along with mods'
         );
     });
 
@@ -143,41 +150,37 @@ describe('buildClassName', () => {
         );
     });
 
-    it('block + invalid mix', () => {
+    it('invalid mix', () => {
         expect(buildClassName.bind(buildClassName, {
-            block: 'block',
             mix: 'mix'
         })).to.throw(
             'mix should be a plain object or array'
         );
     });
 
-    it('block + mix as object', () => {
+    it('mix as object', () => {
         expect(buildClassName({
-            block: 'block',
             mix: {
                 block: 'block2'
             }
         })).to.equal(
-            'block block2'
+            'block2'
         );
     });
 
-    it('block + mix as array', () => {
+    it('mix as array', () => {
         expect(buildClassName({
-            block: 'block',
             mix: [
                 { block: 'block2' },
                 { block: 'block3' }
             ]
         })).to.equal(
-            'block block2 block3'
+            'block2 block3'
         );
     });
 
     it('block + complex mix', () => {
         expect(buildClassName({
-            block: 'block',
             mix: {
                 block: 'block2',
                 elem: 'elem',
@@ -186,7 +189,18 @@ describe('buildClassName', () => {
                 }
             }
         })).to.equal(
-            'block block2__elem block2__elem_mod_val'
+            'block2__elem block2__elem_mod_val'
+        );
+    });
+
+    it('block + mix', () => {
+        expect(buildClassName({
+            block: 'block',
+            mix: {
+                block: 'block2'
+            }
+        })).to.equal(
+            'block block2'
         );
     });
 });
