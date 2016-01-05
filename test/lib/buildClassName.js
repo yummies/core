@@ -12,8 +12,16 @@ describe('buildClassName', () => {
     });
 
     it('no arguments', () => {
+        expect(buildClassName()).to.be.equal('');
+    });
+
+    it('null', () => {
+        expect(buildClassName(null)).to.be.equal('');
+    });
+
+    it('invalid argument', () => {
         expect(
-            buildClassName
+            buildClassName.bind(buildClassName, true)
         ).to.throw(
             'only plain objects accepted'
         );
